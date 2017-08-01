@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Aggregate</title>
+    <!-- Bootswatch -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css"> -->
+    <!-- Font-Awesome -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="./style.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+</head>
+
+<body>
+    <div id="titleDiv">
+        <p> This is an individual event page. </p>
+    </div>
+    <!-- do some ajax to get the board name in a script tag -->
+    <div id="newDataItemForm">
+        <p> this is the link submission form. enter data here to add a new link to this event.</p>
+        <!-- <form action="/linkSubmit" method="post"> -->
+        <input type="text" id="title" placeholder="Title">
+        <input type="url" id="url" placeholder="URL">
+        <input type="text" id="linkType" placeholder="Link Source: Twitter, Youtube, Soundcloud, or Other?">
+        <input type="number" id="rating" placeholder="Quality Rating (out of 10)">
+        <br />
+        <input type="button" value="Submit" id="submit">
+        <!-- <input type="submit">
+        </form> -->
+        <br>
+    </div>
+    <br>
+    <div id="twitterDiv">
+        <strong>Twitter Links:</strong>
+    </div>
+    <div id="soundcloudDiv">
+        <strong>Soundcloud Links:</strong>
+        <br>
+    </div>
+    <div id="youtubeDiv">
+        <strong>Youtube Links:</strong>
+        <br>
+    </div>
+    <div id="articleDiv">
+        <strong>Other Links:</strong>
+    </div>
+</body>
+<script>
+//first function: handles form submission
+$(document).ready(function() {
+
+
+    // var overallurl = document.getUrl.split("/");
+    var overallurl = window.location.href
+    var overallurlArray = overallurl.split("/");
+    var boardID = overallurlArray[overallurlArray.length - 1];
+    var title, url, linkType, rating;
+    $("#submit").click(function() {
+        title = $("#title").val();
+        url = $("#url").val();
+        linkType = $("#linkType").val();
+        rating = $("#rating").val();
+
+
+
+        $.post("/submitLink", { title: title, url: url, linkType: linkType, rating: rating, boardID: boardID }, function(data) {
+
+            if (data === 'done') {
+                window.location.href = "/eventPage/" + boardID;
+            } else if (data.level === "warning") {
+                // alert(JSON.stringify(data));
+                alert(data.msg);
+            }
+        });
+
+
+
+
+
+    });
+});
+
+//second function: display all the links in the appropriate divs
+//can you have 2 onpageload things?
+var overallurl = window.location.href
+var overallurlArray = overallurl.split("/");
+var boardID = overallurlArray[overallurlArray.length - 1];
+
+
+$(function() {
+    // var url = document.getUrl.split("/")[-1];
+    
+});
+
+//third function: make a title for the page with the appropriate board name
+$(function() {
+    // var url = document.getUrl.split("/")[-1];
+    $.get("/eventPage/api/" + boardID, function(myboard) {
+        // or is it like: $.get("/eventPage/:id/myLinks", function(links) {
+
+        	var board = myboard[0];
+        	
+        	console.log(myboard);
+
+        if (board !== 'undefined' || !board.boardname) {
+            
+                var newDiv = $("<div>");
+             
+                
+                var textnode = board.boardname;
+                console.log(textnode);
+            
+
+                newDiv.append("<h1>" + textnode + "</h1>");
+                $("#titleDiv").append(newDiv);
+                
+
+            }
+
+
+         else {
+            $('#titleDiv').append('<h1>Untitled Board</h1>');
+        }
+    });
+});
+
+
+//fourth function: onclick event for delete buttons
+$(document).ready(function() {
+
+
+	$.get("/eventPage/" + boardID + "/myLinks", function(links) {
+        // or is it like: $.get("/eventPage/:id/myLinks", function(links) {
+
+        if (links !== 'undefined') {
+            // var boardDiv = document.getElementById("listOfBoards");
+            for (var i = 0, len = links.length; i < len; i++) {
+                var linkObject = links[i];
+                console.log(linkObject);
+                // var newBoard = document.createElement("div");
+                var newLink = $("<div>");
+                var rating = linkObject.rating.toString();
+                // var a = document.createElement("a");
+                myUrl = linkObject.url;
+
+                if (!linkObject.url.startsWith("http")) {
+
+                    myUrl = "https://" + linkObject.url;
+
+                }
+
+
+                var textnode = "<a href ='" + myUrl + "' target='_blank'>" + linkObject.title + "</a> <br>";
+                var textnode2 = "Rating: " + rating + "<br>";
+
+                // var textnode3 =  + "<br>";
+
+
+                newLink.append(textnode);
+                // newBoard.append(textnode3);
+                newLink.append(textnode2);
+                newButton = $("<input type='button' value='Delete' class='delete'> <br> <br>");
+                newButton.attr("linkid", linkObject._id);
+                newLink.append(newButton);
+
+
+
+                //newBoard.textContent = "jfksdlfja";
+                // newBoard.appendChild(a);
+
+
+          //       example of adding data attr to button:
+          //       var a = $("<button>");
+          // // Adding a class
+          // a.addClass("movie");
+          // // Adding a data-attribute with a value of the movie at index i
+          // a.attr("data-name", movies[i]);
+          // // Providing the button's text with a value of the movie at index i
+          // a.text(movies[i]);
+          // // Adding the button to the HTML
+          // $("#movies-view").append(a);
+
+                // if (linkObject.linkType === "twitter" || linkObject.linkType === "Twitter") {
+                if (myUrl.includes("twitter.com")) {
+
+                    $("#twitterDiv").append(newLink);
+
+                } else if (myUrl.includes("soundcloud.com")) {
+                    $("#soundcloudDiv").append(newLink);
+                } else if (myUrl.includes("youtube.com")) {
+                    $("#youtubeDiv").append(newLink);
+                } else {
+                    $("#articleDiv").append(newLink);
+                }
+
+
+            }
+
+            $(".delete").click(function(ev) {
+				//get the attr out of the button to get the link id
+				//the button takes you to "/eventPage/:id/:linkID"
+				console.log("button clicked");
+				console.log(ev.target.getAttribute("linkid"));
+				var linkID = ev.target.getAttribute("linkid");
+				//var linkID = ev.target.linkID;
+				console.log("link id: " + linkID);
+
+
+				// $.delete("/link/" + linkID, { }, function(data) {
+
+		            // if (data === 'done') {
+		            //     window.location.href = "/eventPage/" + boardID;
+		            // } else if (data.level === "warning") {
+		            //     // alert(JSON.stringify(data));
+		            //     alert(data.msg);
+		            // }\
+		        $.ajax({
+		         	url: "/link/" + linkID,
+		         	type: "DELETE",
+		         	success: function(data) {
+			            if (data === 'done') {
+			                window.location.href = "/eventPage/" + boardID;
+			           	}
+			        }
+			    });
+		    })
+
+        } else {
+            alert("No links to display.");
+        }
+    });
+
+
+
+	
+
+	// });
+
+
+});
+
+</script>
+
+</html>

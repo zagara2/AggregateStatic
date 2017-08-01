@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Aggregate</title>
+    <!-- Bootswatch -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css"> -->
+    <!-- Font-Awesome -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="./style.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+</head>
+
+<body>
+<div id = "welcomeDiv"> 
+    <!-- <p>Welcome to your homepage.</p> -->
+    </div>
+    <div id="newBoardForm">
+        <p> this is the board (event) creation form. enter data here to add a new board to your account.</p>
+        <!-- <form action="/submitBoard" method="post"> -->
+            <input type="text" id="boardname" placeholder="Board Name">
+            <input type="text" id="description" placeholder="Description">
+            <input type="text" id="imageLink" placeholder="Image Link">
+            <input type="button" value="Submit" id="submit">
+            <!-- <input type="submit"> -->
+        <!-- </form> -->
+        <br>
+    </div>
+    <div id="listOfBoards">
+    <p>Your Boards: </p>
+    </div>
+    <br>
+    <a href="/logout">Logout</a>
+</body>
+<script>
+//first function: handles form submission
+$(document).ready(function() {
+
+
+    
+    // var overallurl = window.location.href
+    // var overallurlArray = overallurl.split("/");
+    // var boardID = overallurlArray[overallurlArray.length - 1];
+    // var title, url, linkType, rating;
+    $("#submit").click(function() {
+        boardname = $("#boardname").val();
+        description = $("#description").val();
+        imageLink = $("#imageLink").val();
+        
+
+
+
+        $.post("/submitBoard", { boardname: boardname, description: description, imageLink: imageLink}, function(data) {
+
+            if (data === 'done') {
+                window.location.href = "/admin";
+
+            } else if (data.level === "warning") {
+                
+                alert(data.msg);
+            }
+        });
+
+
+
+
+
+    });
+});
+
+
+
+
+
+
+//second function: puts list of boards on the page
+$(function() {
+    // var url = document.getUrl.split("/")[-1];
+    $.get("/myBoards", function(boards) {
+        // alert(JSON.stringify(data));
+        if (boards !== 'undefined') {
+        	var boardDiv = document.getElementById("listOfBoards");
+        	for (var i = 0, len = boards.length; i < len; i++) {
+        		var board = boards[i];
+        		// var newBoard = document.createElement("div");
+        		var newBoard = $("<div>");
+        		// var a = document.createElement("a");
+        		var textnode = "<a href ='/eventPage/"+board._id+"'>"+ board.boardname + "</a> <br>";
+        		if (board.imageLink) { 
+        		var textnode2 = "<img src = '"+ board.imageLink +"'alt = 'image'> <br> <br>";
+        	}
+        	else {
+        		var textnode2 = "<img src = 'https://static1.squarespace.com/static/55fc0004e4b069a519961e2d/t/55fc301ae4b01342ae9212a1/1442590746805/' alt = 'black square'> <br> <br> "
+        	}
+        		var textnode3 = board.description + "<br>";
+
+
+        		newBoard.append(textnode);
+        		newBoard.append(textnode3);
+        		newBoard.append(textnode2);
+                newButton = $("<input type='button' value='Delete' class='delete'> <br> <br>");
+                newButton.attr("boardid", board._id);
+                newBoard.append(newButton);
+
+
+        		
+        		//newBoard.textContent = "jfksdlfja";
+        		// newBoard.appendChild(a);
+
+        		$("#listOfBoards").append(newBoard);
+                
+                if (i === 0) {
+                    $("#welcomeDiv").append("Welcome to your homepage, " + board.owner+".");
+                }
+            
+        	}
+
+            $(".delete").click(function(ev) {
+                //get the attr out of the button to get the link id
+                //the button takes you to "/eventPage/:id/:linkID"
+                console.log("button clicked");
+                console.log(ev.target.getAttribute("boardid"));
+                var boardID = ev.target.getAttribute("boardid");
+                //var linkID = ev.target.linkID;
+                console.log("board id: " + boardID);
+
+
+                // $.delete("/link/" + linkID, { }, function(data) {
+
+                    // if (data === 'done') {
+                    //     window.location.href = "/eventPage/" + boardID;
+                    // } else if (data.level === "warning") {
+                    //     // alert(JSON.stringify(data));
+                    //     alert(data.msg);
+                    // }\
+                $.ajax({
+                    url: "/eventPage/" + boardID,
+                    type: "DELETE",
+                    success: function(data) {
+                        if (data === 'done') {
+                            window.location.href = "/admin";
+                        }
+                    }
+                });
+            });
+
+            
+        } else {
+            alert("Board list is undefined.");
+        }
+    });
+});
+
+//a function to display the user's email
+</script>
+
+</html>
