@@ -150,7 +150,8 @@ app.get('/admin', function(req, res) {
     if (sess.email) {
         // res.write('<h1>Hello ' + sess.email + '</h1>');
         // res.end('<a href="/logout">Logout</a>');
-        res.sendFile(__dirname + '/html/adminLanding.html');
+        // res.sendFile(__dirname + '/html/adminLanding.html');
+        res.sendFile(__dirname + '/html/staticAdminLandingPage.html');
     } else {
         res.write('<h1>Please login first.</h1>');
         res.end('<a href="/">Login</a>');
@@ -330,6 +331,7 @@ app.delete("/eventPage/:id", function(req, res) {
 
 var Link = require("./models/linkModel.js");
 
+//display the individual event page
 app.get("/eventPage/:id", function(req, res) {
 
     sess = req.session;
@@ -347,7 +349,7 @@ app.get("/eventPage/:id", function(req, res) {
     }
 });
 
-
+//display json of the given board object
 app.get("/eventPage/api/:id", function(req, res) {
 
     sess = req.session;
@@ -373,6 +375,8 @@ app.get("/eventPage/api/:id", function(req, res) {
         res.end('<a href="/">Login</a>');
     }
 });
+
+//display all links on a given board
 
 app.post("/submitLink", function(req, res) {
 

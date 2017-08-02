@@ -9,8 +9,7 @@ var linkSchema = new Schema({
   linkType: {type: String},
    title: {
     type: String,
-    trim: true,
-    required: true
+    trim: true
   },
   boardID: {type: Schema.Types.ObjectId}
 });

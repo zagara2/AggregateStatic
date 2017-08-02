@@ -1,0 +1,649 @@
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Reenie+Beanie" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
+    <!-- Font-Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<style>
+body {
+    font-family: "Reenie Beanie", arial, sans-serif;
+    background-image: URL("http://orig14.deviantart.net/a117/f/2007/059/1/9/corkboard_wood_cork_composite_by_enchantedgal_stock.jpg");
+    font-weight: bold;
+}
+
+h2 {
+    text-align: center;
+    font-size: 35px;
+}
+
+img {
+    width: 17em;
+    height: 17em;
+}
+
+.polaroids {
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.polaroid {
+    display: inline-block;
+    margin: 35px;
+    position: relative;
+    width: auto;
+    /*  -webkit-transform: rotate(-2deg);
+    -o-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);*/
+}
+
+.polaroid:nth-child(n) {
+    -webkit-transform: rotate(-2deg);
+    -o-transform: rotate(-2deg);
+    -moz-transform: rotate(-2deg);
+}
+
+.polaroid:nth-child(2n) {
+    -webkit-transform: rotate(2deg);
+    -o-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+}
+
+.polaroid img {
+    border: 12px solid #fff;
+    border-bottom: 70px solid #fff;
+    -webkit-box-shadow: 3px 3px 3px #888;
+    -moz-box-shadow: 3px 3px 3px #888;
+    box-shadow: 3px 3px 3px #888;
+    height: auto;
+    max-width: 100%;
+}
+
+.polaroid img:hover {
+    box-shadow: 0 0 100px 0 rgba(29, 25, 4, 0.8) inset,
+    0 0 3px 6px rgba(0, 0, 0, 0.07);
+    filter: sepia(20%);
+}
+
+.polaroid p {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.eventName {
+    color: #000;
+    font-size: 30px;
+}
+
+.eventDesc {
+    color: #888;
+    font-size: 15px;
+}
+
+form {
+    height: 20em;
+    width: 20em;
+    background: #ffc;
+}
+
+.loginForm form {
+    text-decoration: none;
+    background: #ffc;
+    display: block;
+    height: 20em;
+    width: 20em;
+    padding: 1em;
+    -moz-box-shadow: 5px 5px 7px rgba(33, 33, 33, 1);
+    -webkit-box-shadow: 5px 5px 7px rgba(33, 33, 33, .7);
+    box-shadow: 5px 5px 7px rgba(33, 33, 33, .7);
+    -moz-transition: -moz-transform .15s linear;
+    -o-transition: -o-transform .15s linear;
+    -webkit-transition: -webkit-transform .15s linear;
+}
+
+.btn {
+    background: #ffc;
+    color: #888;
+}
+
+.btn:hover {
+    color: #000;
+}
+
+.form-control {
+    background: #ffc;
+    color: #000;
+    font-size: 30px;
+    border: none;
+}
+
+.login {
+    margin: 1em;
+    margin-right: 5em;
+    margin-left: -20em;
+    float: right;
+}
+
+.login h2 {
+    font-family: "Reenie Beanie", arial, sans-serif;
+    font-size: 180%;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.login p {
+    font-family: "Reenie Beanie", arial, sans-serif;
+    font-size: 180%;
+}
+
+div.register {
+    font-size: 170%;
+    color: #ACB6C0;
+    text-decoration: none;
+}
+
+a:hover,
+a:visited,
+a:link,
+a:active {
+    text-decoration: none;
+}
+
+.login form {
+    -webkit-transform: rotate(-6deg);
+    -o-transform: rotate(-6deg);
+    -moz-transform: rotate(-6deg);
+}
+
+.registerForm {
+    color: red;
+    height: 1em;
+    /*font-size: 100%;*/
+}
+
+#register-submit {
+    width: 5em;
+    margin-top: 1em;
+}
+
+#register-form-lin {
+    color: #ACB6C0;
+}
+
+#login-form-link {
+    float: left;
+    font-size: 170%;
+    color: #ACB6C0;
+    width: .5em;
+    margin-left: 2em;
+    margin-top: 1em;
+}
+
+.eventModal {
+    font-family: "Indie Flower", arial, sans-serif;
+    background: #F4C0CC;
+    border-radius: 0px;
+    border: none;
+    -webkit-transform: rotate(3deg);
+    -o-transform: rotate(3deg);
+    -moz-transform: rotate(3deg);
+}
+
+.eventModal h1 {
+    font-family: "Indie Flower", arial, sans-serif;
+    font-size: 4em;
+}
+
+.eventModal p {
+    font-size: 2.5em;
+}
+
+.eventModal input,
+textarea,
+.btn {
+    font-size: 1.5em;
+}
+
+.eventModal .modal-content,
+.modal-body,
+.modal-header,
+.modal-footer,
+input,
+textarea,
+.btn,
+.btn:hover {
+    background-color: transparent;
+    border: none;
+    border-bottom: 0px, transparent;
+    border-top: 2px solid transparent;
+}
+
+img {
+    transition: 3s box-shadow ease-in;
+    box-shadow: 0 0 200px 200px rgba(29, 25, 4, 1) inset,
+    0 0 3px 6px rgba(0, 0, 0, 0.07);
+}
+
+img:hover {
+    box-shadow: 0 0 100px 0 rgba(29, 25, 4, 0.8) inset,
+    0 0 3px 6px rgba(0, 0, 0, 0.07);
+    filter: sepia(20%);
+    -webkit-filter: brightness(7);
+    filter: brightness(7);
+}
+
+#welcomeDiv {
+
+    margin: 1em;
+    margin-right: 5em;
+    margin-left: -20em;
+    float: right;
+    background: #ffc;
+    -webkit-transform: rotate(-6deg);
+    -o-transform: rotate(-6deg);
+    -moz-transform: rotate(-6deg);
+    padding:2%;
+    padding-bottom:3%;
+
+}
+
+.logoutLink {
+    font-size: 40px;
+
+}
+
+
+}
+::-webkit-scrollbar {
+    display: none;
+}
+</style>
+
+<body>
+    <div class="polaroids">
+        <div class="polaroid" id="polaroid0">
+            <div id="imgdiv0"> <img id="img0" src="http://lorempixel.com/200/200/nature/1"> </div>
+            <div href="#modelEvent1" data-toggle="modal">
+                <p class="eventName" id="eventName0"> #RussiaGate
+                    <br><a class="eventDesc" id="eventDesc0">more Text ...</a></p>
+            </div>
+        </div>
+        <div class="modal fade" id="modelEvent1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content eventModal">
+                    <div class="modal-header modal-header-success" id="modalHeader0">
+                        <h1> Create Event</h1>
+                    </div>
+                    <div class="modal-body" id="modalBody0">
+                        <div id="newBoardForm">
+                            <p> this is the test board (event) creation form. enter data here to add a new board to your account.</p>
+                            <div action="/submitBoard" method="post">
+                                <input class="col-lg-offset-3 col-lg-6" type="text" id="boardname" placeholder="i.e(#GamerGate)">
+                                <br>
+                                <br>
+                                <input class="col-lg-offset-3 col-lg-6" type="text" id="imageLink" placeholder="Event Image (URL)">
+                                <br>
+                                <br>
+                                <textarea class="col-lg-offset-3 col-lg-6" rows="3" type="text" id="description" placeholder="i.e(About Ethics in Journalism)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="modal-footer0">
+                        <buttton type="submit" id="submit" class="btn btn-default pull-right">Create Event</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <div class="polaroid" id="polaroid1">
+            <div id="imgdiv1"> <img id="img1" src="http://lorempixel.com/200/200/nature/2"> </div>
+            <div href="#modelEvent2" data-toggle="modal">
+                <p class="eventName" id="eventName1">#CNNBlackmail
+                    <br><a class="eventDesc" id="eventDesc1">more Text ...</a></p>
+            </div>
+        </div>
+        <div class="modal fade" id="modelEvent2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content eventModal">
+                    <div class="modal-header modal-header-success" id="modalHeader1">
+                        <h1> Create Event</h1>
+                    </div>
+                    <div class="modal-body" id="modalBody1">
+                        <div id="newBoardForm">
+                            <p> this is the test board (event) creation form. enter data here to add a new board to your account.</p>
+                            <div action="/submitBoard" method="post">
+                                <input class="col-lg-offset-3 col-lg-6" type="text" id="boardname" placeholder="i.e(#GamerGate)">
+                                <br>
+                                <br>
+                                <input class="col-lg-offset-3 col-lg-6" type="text" id="imageLink" placeholder="Event Image (URL)">
+                                <br>
+                                <br>
+                                <textarea class="col-lg-offset-3 col-lg-6" rows="3" type="text" id="description" placeholder="i.e(About Ethics in Journalism)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="modal-footer1">
+                        <button type="submit" id="submit" class="btn btn-default pull-right">Create Event</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <div class="login" id="welcomeDiv">
+            <form id="login-form" class="loginForm" action="#" method="post" role="form" style="display: block;">
+                <h2 style="visibility: hidden">LOGIN</h2>
+                <div class="form-group">
+                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                </div>
+                <div class="col-xs-6 form-group pull-right">
+                    <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                </div>
+                <a href="#" id="register-form-link">
+                    <div class="register">REGISTER</div>
+                </a>
+            </form>
+            <form id="register-form" action="#" method="post" role="form" style="display: none;">
+                <h2 style="visibility: hidden">REGISTER</h2>
+                <div class="form-group registerForm">
+                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                </div>
+                <div class="form-group registerForm">
+                    <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                </div>
+                <div class="form-group registerForm">
+                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-group registerForm">
+                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                </div>
+                <div class="form-group registerForm">
+                    <div class="row">
+                        <a href="#" id="login-form-link">
+                            <div class="log">LOGIN</div>
+                        </a>
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br>
+        <div class="polaroid" id="polaroid2">
+           <div id="imgdiv2">  <img src="http://lorempixel.com/200/200/nature/3"> </div>
+            <div href="#modelEvent3" data-toggle="modal">
+                <p class="eventName" id = "eventName2">#GamerGate
+                    <br><a class="eventDesc" id = "eventDesc2">more Text ...</a></p>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="modelEvent3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content eventModal">
+                    <div class="modal-header modal-header-success" id = "modalHeader2">
+                        <h1> Create Event</h1>
+                    </div>
+                    <div class="modal-body" id = "modalBody2">
+                        <div id="newBoardForm">
+                            <p> this is the test board (event) creation form. enter data here to add a new board to your account.</p>
+                            <div>
+                                <input class="col-lg-offset-3 col-lg-6" type="text" id="boardname" placeholder="i.e(#GamerGate)">
+                                <br>
+                                <br>
+                                <input class="col-lg-offset-3 col-lg-6" type="text" id="imageLink" placeholder="Event Image (URL)">
+                                <br>
+                                <br>
+                                <textarea class="col-lg-offset-3 col-lg-6" rows="3" type="text" id="description" placeholder="i.e(About Ethics in Journalism)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id = "modal-footer2">
+                        <button type="submit" id = "submit" class="btn btn-default pull-right">Create Event</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        <!-- Modal -->
+        <div class="polaroid" id="polaroid3">
+            <div id="imgdiv3"> <img src="http://lorempixel.com/200/200/nature/4"> </div>
+            <div href="#modelEvent4" data-toggle="modal">
+                <p class="eventName" id = "eventName3">#PizzaGate
+                    <br><a class="eventDesc" id = "eventDesc3">more Text ...</a></p>
+            </div>
+        </div>
+        <div class="modal fade" id="modelEvent4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content eventModal">
+                    <div class="modal-header modal-header-success" id = "modalHeader3">
+                        <h1> Create Event</h1>
+                    </div>
+                    <div class="modal-body" id = "modalBody3">
+                        <div id="newBoardForm">
+                            <p> this is the test board (event) creation form. enter data here to add a new board to your account.</p>
+                            <div action="/submitBoard" method="post">
+                                <input class="col-lg-offset-3 col-lg-6" type="text" id="boardname" placeholder="i.e(#GamerGate)">
+                                <br>
+                                <br>
+                                <input class="col-lg-offset-3 col-lg-6" type="text" id="imageLink" placeholder="Event Image (URL)">
+                                <br>
+                                <br>
+                                <textarea class="col-lg-offset-3 col-lg-6" rows="3" type="text" id="description" placeholder="i.e(About Ethics in Journalism)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id = "modal-footer3">
+                        <button type="submit" id = "submit" class="btn btn-default pull-right">Create Event</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <div class="polaroid" id="polaroid4">
+            <div id="imgdiv4"> <img src="http://lorempixel.com/200/200/nature/4"> </div>
+            <div href="#modelEvent5" data-toggle="modal">
+                <p class="eventName" id = "eventName4">#Healthcare
+                    <br><a class="eventDesc" id = "eventDesc4">more Text ...</a></p>
+            </div>
+        </div>
+        <div class="modal fade" id="modelEvent5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content eventModal">
+                    <div class="modal-header modal-header-success" id = "modalHeader4">
+                        <h1> Create Event</h1>
+                    </div>
+                    <div class="modal-body" id = "modalBody4">
+                        <div id="newBoardForm">
+                            <p> this is the test board (event) creation form. enter data here to add a new board to your account.</p>
+                            <div action="/submitBoard" method="post">
+                                <input class="col-lg-offset-3 col-lg-6" type="text" id="boardname" placeholder="i.e(#GamerGate)">
+                                <br>
+                                <br>
+                                <input class="col-lg-offset-3 col-lg-6" type="text" id="imageLink" placeholder="Event Image (URL)">
+                                <br>
+                                <br>
+                                <textarea class="col-lg-offset-3 col-lg-6" rows="3" type="text" id="description" placeholder="i.e(About Ethics in Journalism)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id = "modal-footer4">
+                        <button type="submit" id = "submit" class="btn btn-default pull-right">Create Event</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+</body>
+<script>
+$(function() {
+    $('#login-form-link').click(function(e) {
+        $("#login-form").delay(0).fadeIn(0);
+        $("#register-form").fadeOut(0);
+        $('#register-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+    $('#register-form-link').click(function(e) {
+        $("#register-form").delay(0).fadeIn(0);
+        $("#login-form").fadeOut(0);
+        $('#login-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+
+});
+
+
+//first function: handles form submission
+// $(document).ready(function() {
+$(document).on('click', '#submit', function() {
+
+
+
+
+    // $("#submit").click(function() {
+    console.log("submit clicked");
+    boardname = $("#boardname").val();
+    description = $("#description").val();
+    imageLink = $("#imageLink").val();
+
+
+
+
+    $.post("/submitBoard", { boardname: boardname, description: description, imageLink: imageLink }, function(data) {
+
+        if (data === 'done') {
+            window.location.href = "/admin";
+
+        } else if (data.level === "warning") {
+
+            alert(data.msg);
+        }
+    });
+
+
+
+
+
+    // });
+});
+
+
+//second function: puts list of boards on the page
+$(function() {
+
+    $.get("/myBoards", function(boards) {
+
+        // $("#welcomeDiv").hide();
+        $("#welcomeDiv").empty();
+                    $("#welcomeDiv").append("<p>Welcome to your homepage!");
+        $("#welcomeDiv").append("<a class = 'logoutLink' href='/logout'>Logout</a>");
+
+        if (boards !== 'undefined') {
+            var boardDiv = document.getElementById("listOfBoards");
+            for (var i = 0, len = boards.length; i < len; i++) {
+                var board = boards[i];
+
+
+
+                var textnode = "<a href ='/eventPage/" + board._id + "'>" + board.boardname + "</a>";
+                var textnode3 = board.description;
+                var eventnameid = "#eventName" + i.toString();
+                console.log(eventnameid);
+                $(eventnameid).empty();
+
+
+                // var ptagGrabber = "p[id='"+eventnameid+"']";
+                // console.log(ptagGrabber);
+                // $(ptagGrabber).empty();
+                $(eventnameid).html(textnode + "<br>" + "<a class='eventDesc'>" + textnode3 + "</a>");
+
+
+
+
+
+
+                if (board.imageLink) {
+                    var imgdivId = "#imgdiv" + i.toString();
+                    var textnode2 = "<img src = '" + board.imageLink + "'alt = 'image'>";
+                    $(imgdivId).empty();
+                    $(imgdivId).append(textnode2);
+
+                }
+
+                var modalheaderId = "#modalHeader" + i.toString();
+                $(modalheaderId).empty();
+                $(modalheaderId).append("<h1> Manage Event</h1>");
+                var modalBodyId = "#modalBody" + i.toString();
+                $(modalBodyId).empty();
+                newButton = $("<input type='button' value='Delete Event' class='delete'>");
+                newButton.attr("boardid", board._id);
+                $(modalBodyId).append(newButton);
+                var modalfooterId = "#modal-footer" + i.toString();
+                $(modalfooterId).empty();
+
+
+
+
+
+
+                if (i === 0) {
+                    // $("#welcomeDiv").show();
+                    $("#welcomeDiv").empty();
+                    $("#welcomeDiv").append("<p>Welcome to your homepage, " + board.owner + ".</p>");
+                    $("#welcomeDiv").append("<a class = 'logoutLink' href='/logout'>Logout</a>");
+                }
+
+            }
+
+            $(".delete").click(function(ev) {
+
+                console.log("button clicked");
+                console.log(ev.target.getAttribute("boardid"));
+                var boardID = ev.target.getAttribute("boardid");
+
+                console.log("board id: " + boardID);
+
+
+
+                $.ajax({
+                    url: "/eventPage/" + boardID,
+                    type: "DELETE",
+                    success: function(data) {
+                        if (data === 'done') {
+                            window.location.href = "/admin";
+                        }
+                    }
+                });
+            });
+
+
+        } else {
+            alert("Board list is undefined.");
+        }
+    });
+
+
+
+});
+</script>
+
+</html>
