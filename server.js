@@ -523,6 +523,19 @@ app.get("/demoEventPage", function(req, res) {
 });
 
 
+app.get("/3YS", function(req, res) {
+    
+    sess = req.session;
+    if (sess.email) {
+        
+        res.sendFile(__dirname + '/html/staticAdminEventPage.html');
+        // res.redirect("/admin");
+    } else {
+        res.write('<h1>Please login first.</h1>');
+        res.end('<a href="/">Login</a>');
+    }
+});
+
 
 // Any non API GET routes will be directed to our React App and handled by React Router
 //this goes last since routes are evaluated in order, and this is a catch all last resort route!

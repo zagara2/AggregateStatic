@@ -11,23 +11,6 @@
     <!--    <link rel="stylesheet" href="./style.css"> -->
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
-    <style type="text/css">
-      .item {
-        border: 1px dashed gray;
-        padding: 0.5rem 1rem;
-        margin-bottom: 0.5rem;
-        background-color: white;
-        cursor: move;
-        width: 400px;
-      }
-      .item img {
-        float: right;
-      }
-
-      .item.over {
-        opacity: 0;
-      }
-    </style>
 </head>
 
 <body>
@@ -52,11 +35,8 @@
     <div id="articleDiv">
         <strong>Other Links:</strong>
     </div>
-
-    <div id="root"></div>
     </div>
       <input name="" id="targetField" />
-      <script src="/static/bundle.js"></script>
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -256,50 +236,55 @@ var title, url, linkType, rating;
 
 
     // });
-    var corsHeaders = new Headers();
-    corsHeaders.append("Access-Control-Allow-Origin", "*");
-    corsHeaders.append("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
-
     const getTitle = (url) => {
-        return fetch(url, {mode: "cors", headers: corsHeaders})
-            .then((response) => response.text())
+        
+        return fetch(`https://crossorigin.me/${url}`)
+            .then((response) => {response.text()})
             .then((html) => {
                 const doc = new DOMParser().parseFromString(html, "text/html");
                 const title = doc.querySelectorAll('title')[0];
-                debugger;
-                return title.innerText;
+                // console.log(doc);
+                // console.log(title);
+                
+                return title;
+
             });
     };
 
     
    
-    $('input[id="targetField"]').attr("style", "width:" + $('body').width() + "px;" + "height:" + $('body').width() + "px; position:fixed; top: 0px; left: 0px; border: none; color: transparent; background: transparent; z-index: 0");
+    $('input[id="targetField"').attr("style", "width:" + $('body').width() + "px;" + "height:" + $('body').width() + "px; position:fixed; top: 0px; left: 0px; border: none; color: transparent; background: transparent; z-index: 0");
     $('input').attr("onkeydown", "return false")
 
 
 
     anon = (y) => y = $('input[id="targetField"]').val();
     var Title = (r) => {
-        // anon = (y) => y = $('input[id="targetField"]').val();
+        anon = (y) => y = $('input[id="targetField"]').val();
         r = anon();
+        
         return getTitle(r).then(
             (title) => {
-                console.log(title)
-                var x = title.substr(0, 3);
-                switch (x) {
-                    case "DNS":
-                        alert("Could not grab article."); //modal pop should go here for manual entry
-                        break;
-                    default:
-                        $.post("/submitLink", { title: title, url: url, linkType: linkType, rating: rating, boardID: boardID }, function(data) {
-                            if (data === 'done') {
-                                window.location.href = "/eventPage/" + boardID;
-                            } else if (data.level === "warning") {
-                                // alert(JSON.stringify(data));
-                                alert(data.msg);
-                            }
-                        }); //shoots ajax call to be sent to article section
-                }
+                
+                // title = title;
+                console.log(title);
+                // var x = title.substr(0, 3);
+                // switch (x) {
+                //     case "DNS":
+                //         alert("Could not grab article."); //modal pop should go here for manual entry
+                //         break;
+                //     default:
+                //         // $.post("/submitLink", { title: title, url: url, linkType: linkType, rating: rating, boardID: boardID }, function(data) {
+                //         //     if (data === 'done') {
+                //         //         window.location.href = "/eventPage/" + boardID;
+                //         //     } else if (data.level === "warning") {
+                //         //         // alert(JSON.stringify(data));
+                //         //         alert(data.msg);
+                //         //     }
+                //         // }); //shoots ajax call to be sent to article section
+                //         console.log(title);
+                // }
+                
             })
     }
 
@@ -361,6 +346,7 @@ var title, url, linkType, rating;
                     $('input[id="targetField"]').val("") //shoots link to twitter component
                     break;
                 default:
+                    
                     Title();
                     $('input[id="targetField"]').val("")
             };

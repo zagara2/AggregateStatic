@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Aggregate</title>
@@ -11,29 +10,14 @@
     <!--    <link rel="stylesheet" href="./style.css"> -->
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
-    <style type="text/css">
-      .item {
-        border: 1px dashed gray;
-        padding: 0.5rem 1rem;
-        margin-bottom: 0.5rem;
-        background-color: white;
-        cursor: move;
-        width: 400px;
-      }
-      .item img {
-        float: right;
-      }
-
-      .item.over {
-        opacity: 0;
-      }
-    </style>
 </head>
-
 <body>
     <div id="container">
+
+
     <div id="titleDiv">
         <p> This is an individual event page. </p>
+
     </div>
     <!-- do some ajax to get the board name in a script tag -->
   
@@ -53,10 +37,12 @@
         <strong>Other Links:</strong>
     </div>
 
-    <div id="root"></div>
+    <!-- <a href="/logout">Logout</a> -->
     </div>
       <input name="" id="targetField" />
-      <script src="/static/bundle.js"></script>
+
+
+
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -66,8 +52,6 @@ var boardID = overallurlArray[overallurlArray.length - 1];
 var title, url, linkType, rating;
 // //first function: handles form submission
 // $(document).ready(function() {
-
-
 //         // var overallurl = document.getUrl.split("/");
 //         var overallurl = window.location.href
 //         var overallurlArray = overallurl.split("/");
@@ -78,11 +62,7 @@ var title, url, linkType, rating;
 //             url = $("#url").val();
 //             linkType = $("#linkType").val();
 //             rating = $("#rating").val();
-
-
-
 //             $.post("/submitLink", { title: title, url: url, linkType: linkType, rating: rating, boardID: boardID }, function(data) {
-
 //                 if (data === 'done') {
 //                     window.location.href = "/eventPage/" + boardID;
 //                 } else if (data.level === "warning") {
@@ -90,66 +70,39 @@ var title, url, linkType, rating;
 //                     alert(data.msg);
 //                 }
 //             });
-
-
-
-
-
 //         });
 //     });
-
 //     //second function: display all the links in the appropriate divs
 //     //can you have 2 onpageload things?
 //     var overallurl = window.location.href
 //     var overallurlArray = overallurl.split("/");
 //     var boardID = overallurlArray[overallurlArray.length - 1];
-
-
 //     $(function() {
 //         // var url = document.getUrl.split("/")[-1];
-
 //     });
-
 //     //third function: make a title for the page with the appropriate board name
 //     $(function() {
 //         // var url = document.getUrl.split("/")[-1];
 //         $.get("/eventPage/api/" + boardID, function(myboard) {
 //             // or is it like: $.get("/eventPage/:id/myLinks", function(links) {
-
 //              var board = myboard[0];
-
 //              console.log(myboard);
-
 //             if (board !== 'undefined' || !board.boardname) {
-
 //                     var newDiv = $("<div>");
-
-
 //                     var textnode = board.boardname;
 //                     console.log(textnode);
-
-
 //                     newDiv.append("<h1>" + textnode + "</h1>");
 //                     $("#titleDiv").append(newDiv);
-
-
 //                 }
-
-
 //              else {
 //                 $('#titleDiv').append('<h1>Untitled Board</h1>');
 //             }
 //         });
 //     });
-
-
 //     //fourth function: onclick event for delete buttons
 //     $(document).ready(function() {
-
-
 //      $.get("/eventPage/" + boardID + "/myLinks", function(links) {
 //             // or is it like: $.get("/eventPage/:id/myLinks", function(links) {
-
 //             if (links !== 'undefined') {
 //                 // var boardDiv = document.getElementById("listOfBoards");
 //                 for (var i = 0, len = links.length; i < len; i++) {
@@ -160,33 +113,20 @@ var title, url, linkType, rating;
 //                     var rating = linkObject.rating.toString();
 //                     // var a = document.createElement("a");
 //                     myUrl = linkObject.url;
-
 //                     if (!linkObject.url.startsWith("http")) {
-
 //                         myUrl = "https://" + linkObject.url;
-
 //                     }
-
-
 //                     var textnode = "<a href ='" + myUrl + "' target='_blank'>" + linkObject.title + "</a> <br>";
 //                     var textnode2 = "Rating: " + rating + "<br>";
-
 //                     // var textnode3 =  + "<br>";
-
-
 //                     newLink.append(textnode);
 //                     // newBoard.append(textnode3);
 //                     newLink.append(textnode2);
 //                     newButton = $("<input type='button' value='Delete' class='delete'> <br> <br>");
 //                     newButton.attr("linkid", linkObject._id);
 //                     newLink.append(newButton);
-
-
-
 //                     //newBoard.textContent = "jfksdlfja";
 //                     // newBoard.appendChild(a);
-
-
 //               //       example of adding data attr to button:
 //               //       var a = $("<button>");
 //               // // Adding a class
@@ -197,12 +137,9 @@ var title, url, linkType, rating;
 //               // a.text(movies[i]);
 //               // // Adding the button to the HTML
 //               // $("#movies-view").append(a);
-
 //                     // if (linkObject.linkType === "twitter" || linkObject.linkType === "Twitter") {
 //                     if (myUrl.includes("twitter.com")) {
-
 //                         $("#twitterDiv").append(newLink);
-
 //                     } else if (myUrl.includes("soundcloud.com")) {
 //                         $("#soundcloudDiv").append(newLink);
 //                     } else if (myUrl.includes("youtube.com")) {
@@ -210,10 +147,7 @@ var title, url, linkType, rating;
 //                     } else {
 //                         $("#articleDiv").append(newLink);
 //                     }
-
-
 //                 }
-
 //                 $(".delete").click(function(ev) {
 //                  //get the attr out of the button to get the link id
 //                  //the button takes you to "/eventPage/:id/:linkID"
@@ -222,10 +156,7 @@ var title, url, linkType, rating;
 //                  var linkID = ev.target.getAttribute("linkid");
 //                  //var linkID = ev.target.linkID;
 //                  console.log("link id: " + linkID);
-
-
 //                  // $.delete("/link/" + linkID, { }, function(data) {
-
 //                      // if (data === 'done') {
 //                      //     window.location.href = "/eventPage/" + boardID;
 //                      // } else if (data.level === "warning") {
@@ -242,55 +173,40 @@ var title, url, linkType, rating;
 //                      }
 //                  });
 //              })
-
 //             } else {
 //                 alert("No links to display.");
 //             }
 //         });
-
-
-
-
-
 //      });
-
-
     // });
-    var corsHeaders = new Headers();
-    corsHeaders.append("Access-Control-Allow-Origin", "*");
-    corsHeaders.append("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
-
     const getTitle = (url) => {
-        return fetch(url, {mode: "cors", headers: corsHeaders})
+        return fetch(`https://crossorigin.me/${url}`)
             .then((response) => response.text())
             .then((html) => {
                 const doc = new DOMParser().parseFromString(html, "text/html");
                 const title = doc.querySelectorAll('title')[0];
-                debugger;
                 return title.innerText;
             });
     };
-
     
    
-    $('input[id="targetField"]').attr("style", "width:" + $('body').width() + "px;" + "height:" + $('body').width() + "px; position:fixed; top: 0px; left: 0px; border: none; color: transparent; background: transparent; z-index: 0");
+
+    $('input[id="targetField"').attr("style", "width:" + $('body').width() + "px;" + "height:" + $('body').width() + "px; position:fixed; top: 0px; left: 0px; border: none; color: transparent; background: transparent; z-index: 0");
     $('input').attr("onkeydown", "return false")
-
-
-
     anon = (y) => y = $('input[id="targetField"]').val();
     var Title = (r) => {
         // anon = (y) => y = $('input[id="targetField"]').val();
         r = anon();
         return getTitle(r).then(
             (title) => {
-                console.log(title)
+                title = title;
                 var x = title.substr(0, 3);
                 switch (x) {
                     case "DNS":
                         alert("Could not grab article."); //modal pop should go here for manual entry
                         break;
                     default:
+
                         $.post("/submitLink", { title: title, url: url, linkType: linkType, rating: rating, boardID: boardID }, function(data) {
                             if (data === 'done') {
                                 window.location.href = "/eventPage/" + boardID;
@@ -302,18 +218,14 @@ var title, url, linkType, rating;
                 }
             })
     }
-
     // anon = (y) => y = $('input[id="targetField"]').val();
     $('input[id="targetField"]').on("dragover", function(event) {
         event.stopPropagation();
     });
-
     $('input[id="targetField"]').on("dragleave", function(event) {
         event.preventDefault();
         event.stopPropagation();
     });
-
-
     $('input[id="targetField"]').on("drop", function(event) {
         event.stopPropagation();
         $('input[id="targetField"]').one("mousemove", function(event) {
@@ -329,7 +241,6 @@ var title, url, linkType, rating;
             url = $('input[id="targetField"]').val();
             title = title;
             linkType = w;
-
             switch (w) {
                 case "www.youtube.com":
                     Title();
@@ -361,52 +272,67 @@ var title, url, linkType, rating;
                     $('input[id="targetField"]').val("") //shoots link to twitter component
                     break;
                 default:
+
+                
+
+                try { 
                     Title();
                     $('input[id="targetField"]').val("")
+                    // var myval = $('input[id="targetField"]').val("");
+                    // console.log("myval: "+ myval);
+                    
+
+                }
+
+                catch(err) {
+                    console.log(err);
+                    console.log("didn't work");
+                }
+
+                finally{
+                    console.log("happened regardless");
+
+                    
+
+                        $.post("/submitLink", { title: "Untitled Link", url: url, linkType: linkType, rating: rating, boardID: boardID }, function(data) {
+                        if (data === 'done') {
+                            window.location.href = "/eventPage/" + boardID;
+                        } else if (data.level === "warning") {
+                            // alert(JSON.stringify(data));
+                            alert(data.msg);
+                        }
+                    });
+                    $('input[id="targetField"]').val("") //shoots link to  component
+                    break;
+
+                    
+                }
             };
         })
     });
-
     // third function: make a title for the page with the appropriate board name
     $(function() {
         // var url = document.getUrl.split("/")[-1];
         $.get("/eventPage/api/" + boardID, function(myboard) {
             // or is it like: $.get("/eventPage/:id/myLinks", function(links) {
-
              var board = myboard[0];
-
              console.log(myboard);
-
-            if (board !== 'undefined' || !board.boardname) {
-
+            if (board !== 'undefined' || board.boardname) {
                     var newDiv = $("<div>");
-
-
                     var textnode = board.boardname;
                     console.log(textnode);
-
-
                     newDiv.append("<h1>" + textnode + "</h1>");
                     $("#titleDiv").append(newDiv);
-
-
                 }
-
-
              else {
                 $('#titleDiv').append('<h1>Untitled Board</h1>');
             }
         });
     });
-
-
     //fourth function: onclick event for delete buttons
     $(document).ready(function() {
-
-
      $.get("/eventPage/" + boardID + "/myLinks", function(links) {
             // or is it like: $.get("/eventPage/:id/myLinks", function(links) {
-
             if (links !== 'undefined') {
                 // var boardDiv = document.getElementById("listOfBoards");
                 for (var i = 0, len = links.length; i < len; i++) {
@@ -417,33 +343,20 @@ var title, url, linkType, rating;
                     // var rating = linkObject.rating.toString();
                     // var a = document.createElement("a");
                     myUrl = linkObject.url;
-
                     if (!linkObject.url.startsWith("http")) {
-
                         myUrl = "https://" + linkObject.url;
-
                     }
-
-
                     var textnode = "<a href ='" + myUrl + "' target='_blank' style='position: relative; z-index: 1'>" + linkObject.title + "</a> <br>";
                     // var textnode2 = "Rating: " + rating + "<br>";
-
                     // var textnode3 =  + "<br>";
-
-
                     newLink.append(textnode);
                     // newBoard.append(textnode3);
                     // newLink.append(textnode2);
                     newButton = $("<input type='button' value='Delete' class='delete' style='position: relative; z-index: 1'> <br> <br>");
                     newButton.attr("linkid", linkObject._id);
                     newLink.append(newButton);
-
-
-
                     //newBoard.textContent = "jfksdlfja";
                     // newBoard.appendChild(a);
-
-
               //       example of adding data attr to button:
               //       var a = $("<button>");
               // // Adding a class
@@ -454,12 +367,9 @@ var title, url, linkType, rating;
               // a.text(movies[i]);
               // // Adding the button to the HTML
               // $("#movies-view").append(a);
-
                     // if (linkObject.linkType === "twitter" || linkObject.linkType === "Twitter") {
                     if (myUrl.includes("twitter.com")) {
-
                         $("#twitterDiv").append(newLink);
-
                     } else if (myUrl.includes("soundcloud.com")) {
                         $("#soundcloudDiv").append(newLink);
                     } else if (myUrl.includes("youtube.com")) {
@@ -467,10 +377,7 @@ var title, url, linkType, rating;
                     } else {
                         $("#articleDiv").append(newLink);
                     }
-
-
                 }
-
                 $(".delete").click(function(ev) {
                  //get the attr out of the button to get the link id
                  //the button takes you to "/eventPage/:id/:linkID"
@@ -479,10 +386,7 @@ var title, url, linkType, rating;
                  var linkID = ev.target.getAttribute("linkid");
                  //var linkID = ev.target.linkID;
                  console.log("link id: " + linkID);
-
-
                  // $.delete("/link/" + linkID, { }, function(data) {
-
                      // if (data === 'done') {
                      //     window.location.href = "/eventPage/" + boardID;
                      // } else if (data.level === "warning") {
@@ -499,14 +403,10 @@ var title, url, linkType, rating;
                      }
                  });
              })
-
             } else {
                 alert("No links to display.");
             }
         });
  })
-
-
 </script>
-
 </html>
