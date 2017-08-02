@@ -252,6 +252,7 @@ img:hover {
     -moz-transform: rotate(-6deg);
     padding:2%;
     padding-bottom:3%;
+    font-size:80%;
 
 }
 
@@ -554,7 +555,7 @@ $(function() {
 
         // $("#welcomeDiv").hide();
         $("#welcomeDiv").empty();
-                    $("#welcomeDiv").append("<p>Welcome to your homepage!");
+                    $("#welcomeDiv").append("<p>Welcome to your homepage!</p><br> <p>Click a polaroid to create a new media event board.</p>");
         $("#welcomeDiv").append("<a class = 'logoutLink' href='/logout'>Logout</a>");
 
         if (boards !== 'undefined') {
@@ -608,7 +609,7 @@ $(function() {
                 if (i === 0) {
                     // $("#welcomeDiv").show();
                     $("#welcomeDiv").empty();
-                    $("#welcomeDiv").append("<p>Welcome to your homepage, " + board.owner + ".</p>");
+                    $("#welcomeDiv").append("<p>Welcome to your homepage, " + board.owner + ".</p> <p> Here are all your media event boards.</p> <p>Click a polaroid with black text to create a new board.</p> <p>Click a polaroid with green text to see an existing board.</p><p>To manage an exisitng board, click whitespace around title.");
                     $("#welcomeDiv").append("<a class = 'logoutLink' href='/logout'>Logout</a>");
                 }
 
