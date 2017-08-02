@@ -509,6 +509,21 @@ app.delete("/link/:linkID", function(req, res) { //pass the linkID as a data att
 
 //end of link-related routes
 
+app.get("/demoEventPage", function(req, res) {
+    
+    sess = req.session;
+    if (sess.email) {
+        
+        res.sendFile(__dirname + '/html/staticAdminEventPage.html');
+        // res.redirect("/admin");
+    } else {
+        res.write('<h1>Please login first.</h1>');
+        res.end('<a href="/">Login</a>');
+    }
+});
+
+
+
 // Any non API GET routes will be directed to our React App and handled by React Router
 //this goes last since routes are evaluated in order, and this is a catch all last resort route!
 app.get("*", function(req, res) {
