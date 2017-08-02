@@ -340,7 +340,7 @@ app.get("/eventPage/:id", function(req, res) {
     if (sess.email) {
 
 
-        res.sendFile(__dirname + "/html/eventPage.html");
+        res.sendFile(__dirname + "/html/eventPage1.html");
 
 
     } else {
